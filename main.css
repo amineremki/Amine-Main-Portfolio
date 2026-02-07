@@ -1,0 +1,95 @@
+:root {
+    --accent: #00d4ff;
+    --dark: #050b18;
+    --card-h: 420px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: var(--dark);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+/* خلفية متدرجة فخمة */
+.bg-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top right, #1e293b, transparent);
+    z-index: -1;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
+
+header { text-align: center; margin-bottom: 70px; }
+
+header h1 { font-size: 5rem; font-weight: 900; letter-spacing: 12px; margin-bottom: 10px; }
+
+.tagline { color: var(--accent); letter-spacing: 4px; font-size: 0.8rem; }
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 35px;
+}
+
+/* الحل النهائي لضبط الصور */
+.card {
+    height: var(--card-h);
+    border-radius: 25px;
+    position: relative;
+    overflow: hidden;
+    background-color: #111;
+    border: 1px solid rgba(255,255,255,0.1);
+    opacity: 0; transform: translateY(30px);
+    transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--img);
+    background-size: cover;       /* يملأ المساحة دون تمطيط */
+    background-position: top;    /* يظهر أعلى الموقع دائماً */
+    transition: 0.6s ease;
+    z-index: 1;
+}
+
+.card:hover::before { transform: scale(1.1); }
+
+.card-inner {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(5,11,24,1) 10%, transparent 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+}
+
+.category { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; }
+
+.card h3 { margin: 5px 0 20px; font-size: 1.6rem; }
+
+.btn {
+    text-decoration: none;
+    background: white;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    width: fit-content;
+    transition: 0.3s;
+}
+
+.btn:hover { background: var(--accent); color: white; box-shadow: 0 0 15px var(--accent); }
+
+/* كلاس الأنيميشن للـ JS */
+.card.active { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) { header h1 { font-size: 3rem; } .card { height: 350px; } }
